@@ -7,10 +7,10 @@
 
 - name: "Generate Configuration"
   template:
-    src: inventory
+    src: inventory.j2
     dest: "{{ ansible_tower_setup_dir }}/ansible-tower-setup-{{ ansible_tower_setup_version }}/inventory"
-  tags: update
 
 - name: "Setup Ansible Tower"
-  shell: setup.sh
+  shell: ./setup.sh
+  args:
     chdir: "{{ ansible_tower_setup_dir }}/ansible-tower-setup-{{ ansible_tower_setup_version }}"
