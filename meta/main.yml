@@ -4,7 +4,7 @@ dependencies:
     when: ansible_os_family == 'RedHat'
   - role: geerlingguy.ansible
   - role: geerlingguy.pip
-    pip_packages:
+    pip_install_packages:
       - name: ansible-tower-cli
         virtualenv: "/var/lib/awx/venv/awx"
       - name: ansible-tower-cli
