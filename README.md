@@ -13,7 +13,7 @@ Role Variables
 
 defaults/main.yml
 ```
-ansible_tower_setup_version: "latest"
+ansible_tower_setup_version: "3.2.8"
 ansible_tower_setup_dir: "/opt"
 ansible_tower_setup_admin_password: "toweradmin"
 ansible_tower_setup_pg_database: "tower"
