@@ -38,7 +38,6 @@ dependencies:
       - name: pan-python
         virtualenv: "/var/lib/awx/venv/ansible"
 
-
 galaxy_info:
   author: Victor da Costa
   description: Setup Ansible Tower by Red Hat
