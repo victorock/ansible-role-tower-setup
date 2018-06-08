@@ -1,8 +1,5 @@
 ---
-dependencies:
-  - role: geerlingguy.repo-epel
-    when: ansible_os_family == 'RedHat'
-  - role: geerlingguy.ansible
+dependencies: []
 
 galaxy_info:
   author: Victor da Costa
