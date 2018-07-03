@@ -11,6 +11,5 @@
   roles:
     - role: geerlingguy.repo-epel
       when: ansible_os_family == "RedHat"
-    - role: geerlingguy.git
     - role: geerlingguy.ansible
     - role: role_under_test
