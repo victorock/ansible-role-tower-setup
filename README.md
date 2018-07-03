@@ -13,13 +13,13 @@ Role Variables
 
 defaults/main.yml
 ```
-ansible_tower_setup_version: "3.2.8"
-ansible_tower_setup_dir: "/opt"
-ansible_tower_setup_admin_password: "toweradmin"
-ansible_tower_setup_pg_database: "tower"
-ansible_tower_setup_pg_username: "tower"
-ansible_tower_setup_pg_password: "tower"
-ansible_tower_setup_rabbitmq_pass: "tower"
+tower_setup_version: "3.2.5"
+tower_setup_dir: "/opt"
+tower_setup_admin_password: "toweradmin"
+tower_setup_pg_database: "tower"
+tower_setup_pg_username: "tower"
+tower_setup_pg_password: "tower"
+tower_setup_rabbitmq_pass: "tower"
 
 ```
 
@@ -33,40 +33,6 @@ dependencies:
   - role: geerlingguy.repo-epel
     when: ansible_os_family == 'RedHat'
   - role: geerlingguy.ansible
-  - role: geerlingguy.pip
-    pip_install_packages:
-      - name: ansible-tower-cli
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: ansible-tower-cli
-        virtualenv: "/var/lib/awx/venv/ansible"
-      - name: ncclient
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: ncclient
-        virtualenv: "/var/lib/awx/venv/ansible"
-      - name: f5-sdk
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: f5-sdk
-        virtualenv: "/var/lib/awx/venv/ansible"
-      - name: f5-icontrol-rest
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: f5-icontrol-rest
-        virtualenv: "/var/lib/awx/venv/ansible"
-      - name: ipaddress
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: ipaddress
-        virtualenv: "/var/lib/awx/venv/ansible"
-      - name: passlib
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: passlib
-        virtualenv: "/var/lib/awx/venv/ansible"
-      - name: pandevice
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: pandevice
-        virtualenv: "/var/lib/awx/venv/ansible"
-      - name: pan-python
-        virtualenv: "/var/lib/awx/venv/awx"
-      - name: pan-python
-        virtualenv: "/var/lib/awx/venv/ansible"
 
 ```
 
@@ -79,7 +45,7 @@ Example Playbook
   become: true
 
   roles:
-    - victorock.ansible-tower-setup
+    - victorock.tower_setup
 ```
 
 License
