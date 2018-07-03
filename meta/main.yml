@@ -1,10 +1,14 @@
 ---
-dependencies: []
+dependencies:
+  - role: geerlingguy.repo-epel
+    when: ansible_os_family == 'RedHat'
+  - role: geerlingguy.ansible
 
 galaxy_info:
-  author: Victor da Costa
-  description: Setup Ansible Tower by Red Hat
-  license: GPLv3
+  role_name: tower_setup
+  author: "Victor da Costa"
+  description: "Setup Ansible Tower by Red Hat"
+  license: "GPLv3"
   min_ansible_version: 2.4
   platforms:
   - name: EL

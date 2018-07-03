@@ -1,17 +1,17 @@
 ---
 - name: "Download Ansible Tower"
   unarchive:
-    src: http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ ansible_tower_setup_version }}.tar.gz
-    dest: "{{ ansible_tower_setup_dir }}"
-    creates: "{{ ansible_tower_setup_dir }}/ansible-tower-setup-{{ ansible_tower_setup_version }}"
+    src: http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ tower_setup_version }}.tar.gz
+    dest: "{{ tower_setup_dir }}"
+    creates: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
     remote_src: yes
 
 - name: "Generate Configuration"
   template:
     src: inventory.j2
-    dest: "{{ ansible_tower_setup_dir }}/ansible-tower-setup-{{ ansible_tower_setup_version }}/inventory"
+    dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
 
 - name: "Setup Ansible Tower"
   shell: ./setup.sh
   args:
-    chdir: "{{ ansible_tower_setup_dir }}/ansible-tower-setup-{{ ansible_tower_setup_version }}"
+    chdir: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
