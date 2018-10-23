@@ -48,6 +48,32 @@ Example Playbook
     - victorock.tower_setup
 ```
 
+```YAML
+- name: "Setup Ansible Tower by Red Hat (custom)"
+  hosts: tower
+  become: true
+
+  roles:
+    - role: victorock.tower_setup
+      tower_setup_version: "3.3.0-1"
+      tower_setup_admin_password: "mypassword"
+      tower_setup_pg_password: "mydbpassword"
+```
+
+```YAML
+- name: "Setup (locally) Ansible Tower by Red Hat (custom)"
+  hosts: localhost
+  connection: local
+  become: true
+
+  roles:
+    - role: victorock.tower_setup
+      tower_setup_version: "3.3.0-1"
+      tower_setup_admin_password: "mypassword"
+      tower_setup_pg_password: "mydbpassword"
+```
+
+
 License
 -------
 
