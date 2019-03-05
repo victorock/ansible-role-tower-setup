@@ -5,13 +5,11 @@
     dest: "{{ tower_setup_dir }}"
     creates: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
     remote_src: yes
+  notify: setup_ansible_tower
 
 - name: "Generate Configuration"
   template:
     src: inventory.j2
     dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
+  notify: setup_ansible_tower
 
-- name: "Setup Ansible Tower"
-  shell: ./setup.sh
-  args:
-    chdir: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
