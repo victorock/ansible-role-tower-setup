@@ -1,4 +1,9 @@
 ---
+- name: "Install Ansible"
+  yum:
+    name: "ansible"
+    state: "latest"
+
 - name: "Download Ansible Tower"
   unarchive:
     src: http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ tower_setup_version }}.tar.gz
