@@ -1,6 +1,5 @@
 ---
-dependencies:
-  - role: geerlingguy.ansible
+dependencies: []
 
 galaxy_info:
   role_name: tower_setup
