@@ -1,0 +1,9 @@
+---
+_tower_setup_venv_map:
+  - packages: "ansible-tower-cli"
+  - venv: "/var/lib/awx/venv/ansible-cloud-release"
+    packages: "{{ tower_setup_common_packages + tower_setup_cloud_packages }}"
+  - venv: "/var/lib/awx/venv/ansible-host-release"
+    packages: "{{ tower_setup_common_packages + tower_setup_host_packages }}"
+  - venv: "/var/lib/awx/venv/ansible-network-release"
+    packages: "{{ tower_setup_common_packages + tower_setup_network_packages }}"

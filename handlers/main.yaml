@@ -1,6 +1,0 @@
----
-- name: "Setup Ansible Tower"
-  shell: ./setup.sh
-  args:
-    chdir: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
-  listen: setup_ansible_tower
