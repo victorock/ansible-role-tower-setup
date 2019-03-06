@@ -10,11 +10,27 @@
     dest: "{{ tower_setup_dir }}"
     creates: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
     remote_src: yes
-  notify: setup_ansible_tower
 
 - name: "Generate Configuration"
   template:
+    backup: true
     src: inventory.j2
     dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
-  notify: setup_ansible_tower
+  register: inventory_config
 
+- name: "Setup Ansible Tower"
+  when: inventory_config.changed | bool
+  block:
+    - name: "Setup"
+      shell: ./setup.sh
+      args:
+        chdir: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
+  rescue:
+    - name: "Restore inventory file"
+      copy:
+        src: "{{ inventory_config.backup_file }}"
+        dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
+    
+    - name: "Original inventory file recovered"
+      fail:
+        msg: "Uanble to proceed with setup."
