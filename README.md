@@ -26,15 +26,7 @@ tower_setup_rabbitmq_pass: "tower"
 Dependencies
 ------------
 
-The following dependencies are defined in `meta/main.yml`:
-
-```YAML
-dependencies:
-  - role: geerlingguy.repo-epel
-    when: ansible_os_family == 'RedHat'
-  - role: geerlingguy.ansible
-
-```
+None
 
 Example Playbook
 ----------------
