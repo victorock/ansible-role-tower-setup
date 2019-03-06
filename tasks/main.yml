@@ -1,5 +1,6 @@
 ---
 - name: "Install Ansible"
+  become: true
   yum:
     name: "ansible"
     state: "latest"
@@ -12,6 +13,7 @@
     remote_src: yes
 
 - name: "Generate Configuration"
+  become: true
   template:
     backup: true
     src: inventory.j2
@@ -22,11 +24,13 @@
   when: inventory_config.changed | bool
   block:
     - name: "Setup"
+      become: true
       shell: ./setup.sh
       args:
         chdir: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
   rescue:
     - name: "Restore inventory file"
+      become: true
       copy:
         src: "{{ inventory_config.backup_file }}"
         dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
@@ -35,7 +39,14 @@
       fail:
         msg: "Uanble to proceed with setup."
 
+- name: "Easy_install pip"
+  become: true
+  easy_install:
+    name: "pip"
+    state: "latest"
+
 - name: "Install VENVs Packages"
+  become: true
   pip:
     name: "{{ _tower_setup_venv.packages }}"
     umask: "0022"
