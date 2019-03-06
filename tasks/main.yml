@@ -34,3 +34,14 @@
     - name: "Original inventory file recovered"
       fail:
         msg: "Uanble to proceed with setup."
+
+- name: "Install VENVs Packages"
+  pip:
+    name: "{{ _tower_setup_venv.packages }}"
+    umask: "0022"
+    virtualenv: "{{ _tower_setup_venv.venv | default(omit) }}"
+    state: "latest"
+  loop: "{{ _tower_setup_venv_map }}"
+  loop_control: 
+    loop_var: _tower_setup_venv
+    label: "venv: {{ _tower_setup_venv.venv | default('default') }}"
