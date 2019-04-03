@@ -1,0 +1,36 @@
+---
+- name: "Setup Ansible Tower"
+  block:
+    - name: "Setup"
+      become: true
+      shell: ./setup.sh
+      args:
+        chdir: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
+  rescue:
+    - name: "Restore inventory file"
+      become: true
+      copy:
+        src: "{{ inventory_config.backup_file }}"
+        dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
+    
+    - name: "Original inventory file recovered"
+      fail:
+        msg: "Uanble to proceed with setup."
+
+- name: "Easy_install pip"
+  become: true
+  easy_install:
+    name: "pip"
+    state: "latest"
+
+- name: "Ensure VENVs Pips"
+  become: true
+  pip:
+    name: "{{ _tower_setup_venv.pips }}"
+    umask: "0022"
+    virtualenv: "{{ _tower_setup_venv.venv | default(omit) }}"
+    state: "latest"
+  loop: "{{ _tower_setup_venv_map }}"
+  loop_control: 
+    loop_var: _tower_setup_venv
+    label: "venv: {{ _tower_setup_venv.venv | default('default') }}"
