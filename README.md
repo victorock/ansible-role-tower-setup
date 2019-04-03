@@ -6,7 +6,9 @@ Simple Role to Setup Ansible Tower by Red Hat.
 Requirements
 ------------
 
-None
+Repository containing:
+  - ansible
+  - @Development Tools
 
 Role Variables
 --------------

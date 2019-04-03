@@ -1,0 +1,4 @@
+---
+- name: "Setup Tower"
+  include_tasks: "{{ role_path }}/includes/setup_tower.yaml"
+  listen: setup_tower

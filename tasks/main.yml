@@ -1,16 +1,18 @@
 ---
-- name: "Install Ansible"
+- name: "Install required packages"
   become: true
   yum:
-    name: "ansible"
-    state: "latest"
+    name:
+      - "ansible"
+      - "@Development Tools"
+    state: "present"
 
 - name: "Download Ansible Tower"
   unarchive:
     src: http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ tower_setup_version }}.tar.gz
     dest: "{{ tower_setup_dir }}"
     creates: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
-    remote_src: yes
+    remote_src: true
 
 - name: "Generate Configuration"
   become: true
@@ -18,41 +20,8 @@
     backup: true
     src: inventory.j2
     dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
+  notify: "setup_tower"
   register: inventory_config
 
-- name: "Setup Ansible Tower"
-  when: inventory_config.changed | bool
-  block:
-    - name: "Setup"
-      become: true
-      shell: ./setup.sh
-      args:
-        chdir: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
-  rescue:
-    - name: "Restore inventory file"
-      become: true
-      copy:
-        src: "{{ inventory_config.backup_file }}"
-        dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
-    
-    - name: "Original inventory file recovered"
-      fail:
-        msg: "Uanble to proceed with setup."
-
-- name: "Easy_install pip"
-  become: true
-  easy_install:
-    name: "pip"
-    state: "latest"
-
-- name: "Install VENVs Packages"
-  become: true
-  pip:
-    name: "{{ _tower_setup_venv.packages }}"
-    umask: "0022"
-    virtualenv: "{{ _tower_setup_venv.venv | default(omit) }}"
-    state: "latest"
-  loop: "{{ _tower_setup_venv_map }}"
-  loop_control: 
-    loop_var: _tower_setup_venv
-    label: "venv: {{ _tower_setup_venv.venv | default('default') }}"
+- name: "force all notified handlers to run *NOW*"
+  meta: flush_handlers

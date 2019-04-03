@@ -1,4 +1,5 @@
-tower_setup_version: "3.2.5"
+---
+tower_setup_version: "3.4.3-1"
 tower_setup_dir: "/opt"
 tower_setup_admin_password: "toweradmin"
 tower_setup_pg_database: "tower"
@@ -6,14 +7,14 @@ tower_setup_pg_username: "tower"
 tower_setup_pg_password: "tower"
 tower_setup_rabbitmq_pass: "tower"
 
-tower_setup_common_packages:
+tower_setup_common_pips:
   - "python-memcached"
   - "psutil"
   - "ansible-tower-cli"
   - "ipaddress"
   - "netaddr"
 
-tower_setup_cloud_packages:
+tower_setup_cloud_pips:
   - "google-cloud"
   - "azure"
   - "apache-libcloud"
@@ -21,10 +22,10 @@ tower_setup_cloud_packages:
   - "boto3"
   - "passlib"
 
-tower_setup_host_packages:
+tower_setup_host_pips:
   - "pywinrm"
 
-tower_setup_network_packages:
+tower_setup_network_pips:
   - "f5-sdk"
   - "bigsuds"
   - "ncclient"
