@@ -1,4 +1,5 @@
-tower_setup_version: "3.2.5"
+---
+tower_setup_version: "3.4.3-1"
 tower_setup_dir: "/opt"
 tower_setup_admin_password: "toweradmin"
 tower_setup_pg_database: "tower"

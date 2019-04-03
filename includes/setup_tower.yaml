@@ -12,7 +12,7 @@
       copy:
         src: "{{ inventory_config.backup_file }}"
         dest: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}/inventory"
-    
+
     - name: "Original inventory file recovered"
       fail:
         msg: "Uanble to proceed with setup."
@@ -31,6 +31,6 @@
     virtualenv: "{{ _tower_setup_venv.venv | default(omit) }}"
     state: "latest"
   loop: "{{ _tower_setup_venv_map }}"
-  loop_control: 
+  loop_control:
     loop_var: _tower_setup_venv
     label: "venv: {{ _tower_setup_venv.venv | default('default') }}"
