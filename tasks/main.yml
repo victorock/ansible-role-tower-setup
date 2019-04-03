@@ -2,17 +2,17 @@
 - name: "Install required packages"
   become: true
   yum:
-    name: 
+    name:
       - "ansible"
       - "@Development Tools"
-    state: "latest"
+    state: "present"
 
 - name: "Download Ansible Tower"
   unarchive:
     src: http://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-{{ tower_setup_version }}.tar.gz
     dest: "{{ tower_setup_dir }}"
     creates: "{{ tower_setup_dir }}/ansible-tower-setup-{{ tower_setup_version }}"
-    remote_src: yes
+    remote_src: true
 
 - name: "Generate Configuration"
   become: true
